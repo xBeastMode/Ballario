@@ -1,36 +1,39 @@
 package org.ballario;
-
-import javax.swing.*;
-import org.ballario.Entity.Cell;
-import java.awt.*;
-import java.io.File;
-@SuppressWarnings("serial")
-public class Ballario extends JFrame {
+import org.ballario.Manager.EntityManager;
+import org.ballario.Window.Window;
+public class Ballario implements Runnable {
 	
-	public String resPath;
+	public enum STATE{
+		MAIN_MENU,
+		GAME_PROCESS
+	};
 	
-	public Ballario() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
-		setExtendedState(MAXIMIZED_BOTH);
-		setMaximumSize(D);
-		getContentPane().setBackground(Color.WHITE);
-		this.resPath = (new File(this.getClass().getClassLoader().getResource("").getPath())).getParent();
-		this.resPath = this.resPath.replace("%20", " ");
-		ImageIcon icon = new ImageIcon(this.resPath + "\\res\\icon\\virus.png");
-		setIconImage(icon.getImage());
-		setTitle("Ballario");
-		pack();
-		setVisible(true);
+	public static final EntityManager EM = new EntityManager();
+	
+	public STATE game_state = STATE.MAIN_MENU;
+		
+	public static final EntityManager EntityManager(){
+		return EM;
+	}
+	
+	public void render(){
+		//TODO
+	}
+	
+	public void tick(){
+		//TODO
 	}
 
-	public void paint(Graphics g) {
-//		Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
-//		Cell c = new Cell(null, 20, D.width / 2, D.height / 2, false, new Color(255, 0, 0));
-//		c.render(g);
+	@Override
+	public void run() {
+		if(game_state == STATE.GAME_PROCESS){
+			render();
+			tick();
+		}
 	}
-
+	
 	public static void main(String[] args) {
-		Ballario game = new Ballario();
+		Window main = new Window();
+		main.start();
 	}
 }

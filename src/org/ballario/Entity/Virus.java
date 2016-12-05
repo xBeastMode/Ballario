@@ -1,22 +1,20 @@
 package org.ballario.Entity;
 
-import java.awt.Graphics;
-
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 
-public class Cell extends Entity{
-	public String name;
+public class Virus extends Entity{
+
 	public int mass;
 	public Color color;
-	public Boolean isEjected = false;
+	public String name;
 	
-	public Cell(String name, int mass, int x, int y, Boolean isEjected, Color color){
+	public Virus(int x, int y, int mass) {
 		super(x, y);
-		this.name = name == null ? "An unnamed cell" : name;
+		this.name = "Virus";
 		this.mass = mass;
-		this.isEjected = isEjected;
-		this.color = color;
+		this.color = new Color(0, 255, 0);
 	}
 	
 	public void setName(String name){
@@ -51,14 +49,6 @@ public class Cell extends Entity{
 		return this.mass;
 	}
 	
-	public Boolean isEjected(){
-		return this.isEjected;
-	}
-	
-	public void setEjected(Boolean val){
-		this.isEjected = val;
-	}
-	
 	public void setColor(Color color){
 		this.color = color;
 	}
@@ -68,28 +58,23 @@ public class Cell extends Entity{
 	}
 	
 	public void updateMovement(){
-		
+		//not required
 	}
 	
 	public void render(Graphics g){
 		g.setColor(this.getColor().darker());
 		int radius = 12;
 		g.fillOval(
-				(this.getX() - this.getMass()) - ((int) radius / 2),
-				(this.getY() - this.getMass()) - ((int) radius / 2),
+				(this.getX() - this.getMass()) - ((int) radius / 2), 
+				(this.getY() - this.getMass()) - ((int) radius / 2), 
 				(this.getMass()*2) + radius, (this.getMass()*2-1) + radius);//outline
 		g.setColor(this.color);
 		g.fillOval(
 				this.getX() - this.getMass(),
 				this.getY() - this.getMass(),
-				this.getMass()*2, this.getMass()*2);//ball itself
+				this.getMass()*2, this.getMass()*2);//virus itself
 		g.setColor(Color.GRAY);
-		g.setFont(new Font("Arial", Font.BOLD, (this.getMass() / 2) + 5));
-		if(this.getName() != "An unnamed cell"){
-			g.drawString(this.getName(),
-					this.getX() - (this.getMass() + 25),
-					this.getY() - (this.getMass() - 22));
-		}
+		g.setFont(new Font("Arial", Font.ITALIC, (this.getMass() / 2) + 5));
 	}
 	
 }
