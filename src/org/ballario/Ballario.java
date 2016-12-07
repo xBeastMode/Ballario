@@ -1,5 +1,9 @@
 package org.ballario;
+import java.awt.Color;
+
+import org.ballario.Entity.Cell;
 import org.ballario.Manager.EntityManager;
+import org.ballario.Map.Grid;
 import org.ballario.Window.Window;
 public class Ballario implements Runnable {
 	
@@ -8,11 +12,13 @@ public class Ballario implements Runnable {
 		GAME_PROCESS
 	};
 	
-	public static final EntityManager EM = new EntityManager();
+	public static EntityManager EM = new EntityManager();
 	
-	public STATE game_state = STATE.MAIN_MENU;
+	public static STATE game_state = STATE.MAIN_MENU;
+	
+	public static Window main = new Window();
 		
-	public static final EntityManager EntityManager(){
+	public static EntityManager EntityManager(){
 		return EM;
 	}
 	
@@ -33,7 +39,8 @@ public class Ballario implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		Window main = new Window();
 		main.start();
+		Thread t = new Thread(new Ballario());
+		t.start();
 	}
 }

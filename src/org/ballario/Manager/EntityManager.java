@@ -1,6 +1,7 @@
 package org.ballario.Manager;
 import java.util.HashMap;
 import java.util.Map;
+
 public class EntityManager{
 	
 	public Map<Integer, Object> Entities = new HashMap<Integer, Object>();

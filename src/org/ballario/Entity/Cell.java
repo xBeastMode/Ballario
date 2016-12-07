@@ -1,6 +1,7 @@
 package org.ballario.Entity;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -67,11 +68,17 @@ public class Cell extends Entity{
 		return this.color;
 	}
 	
+	public void tick(Graphics g){
+		this.render(g);
+		this.updateMovement();
+	}
+	
 	public void updateMovement(){
 		
 	}
 	
 	public void render(Graphics g){
+		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(this.getColor().darker());
 		int radius = 12;
 		g.fillOval(
@@ -90,6 +97,7 @@ public class Cell extends Entity{
 					this.getX() - (this.getMass() + 25),
 					this.getY() - (this.getMass() - 22));
 		}
+		g2d.translate(this.getX(), this.getY());
 	}
 	
 }
